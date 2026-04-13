@@ -612,16 +612,16 @@ function setupLinkHijack() {
     const roll = Math.random();
 
     if (roll < 0.20) {
-      // 20%：直接跳到广告落地页，倒计时结束后才能去目标页
-      location.href = 'ad-landing.html?dest=' + encodeURIComponent(dest);
+      // 20%：新标签打开广告落地页，倒计时结束后跳目标页
+      window.open('ad-landing.html?dest=' + encodeURIComponent(dest), '_blank');
 
     } else if (roll < 0.90) {
-      // 70%：弹插屏广告，关闭后才跳转
+      // 70%：弹插屏广告，关闭后新标签打开目标页
       showLinkInterstitial(dest);
 
     } else {
-      // 10%：正常跳转
-      location.href = dest;
+      // 10%：新标签正常跳转
+      window.open(dest, '_blank');
     }
   });
 }
@@ -672,7 +672,7 @@ function showLinkInterstitial(dest) {
         skipText.innerHTML = `<button class="interstitial-close-btn" id="li-close-btn">✕ 关闭广告，继续阅读</button>`;
         document.getElementById('li-close-btn').onclick = () => {
           overlay.remove();
-          location.href = dest;
+          window.open(dest, '_blank');
         };
       }
     }
