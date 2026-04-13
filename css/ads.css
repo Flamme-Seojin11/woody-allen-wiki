@@ -1,0 +1,1016 @@
+/* ===== 广告与干扰元素样式 ===== */
+
+/* ----- 通用 ----- */
+.ad-close-btn,
+.popup-close-x {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  background: rgba(0,0,0,0.15);
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  line-height: 1;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  transition: background 0.2s;
+}
+.ad-close-btn:hover,
+.popup-close-x:hover {
+  background: rgba(0,0,0,0.4);
+}
+
+.popup-cta-btn {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 10px 28px;
+  background: linear-gradient(135deg, #ff5f2e, #ff2d55);
+  color: #fff;
+  font-size: 15px;
+  font-weight: bold;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(255,45,85,0.4);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.popup-cta-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(255,45,85,0.5);
+}
+
+.no-thanks {
+  font-size: 12px;
+  color: #999;
+  margin-top: 10px;
+  cursor: pointer;
+  text-decoration: underline;
+}
+.no-thanks:hover { color: #555; }
+
+/* ----- 1. 顶部横幅 ----- */
+#top-banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9000;
+  background: linear-gradient(90deg, #1a1a2e, #16213e, #0f3460);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 8px 40px 8px 16px;
+  font-size: 13px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+.banner-text { flex: 1; text-align: center; }
+.banner-cta {
+  background: #e94560;
+  color: #fff;
+  border: none;
+  padding: 5px 14px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.banner-cta:hover { background: #c73652; }
+.banner-close {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #aaa;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 4px 6px;
+}
+.banner-close:hover { color: #fff; }
+
+/* ----- 2. 欢迎弹窗 / 通用遮罩 ----- */
+#welcome-overlay,
+#email-modal,
+#exit-modal,
+#interstitial-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.65);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#welcome-popup,
+#email-popup,
+#exit-popup {
+  position: relative;
+  background: #fff;
+  border-radius: 12px;
+  padding: 30px 32px;
+  max-width: 440px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  animation: popIn 0.3s ease;
+}
+
+@keyframes popIn {
+  from { opacity: 0; transform: scale(0.8) translateY(20px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.popup-header {
+  background: linear-gradient(135deg, #ff5f2e, #ff2d55);
+  margin: -30px -32px 20px;
+  padding: 14px 20px;
+  border-radius: 12px 12px 0 0;
+  color: #fff;
+  font-size: 13px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+.popup-logo { font-size: 14px; }
+.popup-img-placeholder {
+  font-size: 48px;
+  margin-bottom: 12px;
+}
+#welcome-popup h2 {
+  font-size: 18px;
+  margin: 0 0 10px;
+  color: #1a1a1a;
+}
+#lucky-number { color: #e94560; }
+#welcome-popup p { font-size: 14px; color: #444; margin: 6px 0; }
+.popup-sub { color: #e94560; font-weight: bold; font-size: 13px; }
+.popup-disclaimer { font-size: 10px; color: #bbb; margin-top: 8px; }
+
+/* ----- 3. 邮件弹窗 ----- */
+.email-icon { font-size: 40px; margin-bottom: 10px; }
+#email-popup h3 { font-size: 20px; margin: 0 0 8px; }
+#email-popup p { font-size: 13px; color: #555; margin: 6px 0 14px; }
+.email-input {
+  width: 100%;
+  padding: 10px 14px;
+  border: 2px solid #e0e0e0;
+  border-radius: 6px;
+  font-size: 14px;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+  outline: none;
+}
+.email-input:focus { border-color: #3366cc; }
+.email-submit-btn {
+  width: 100%;
+  padding: 11px;
+  background: #3366cc;
+  color: #fff;
+  font-size: 15px;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.email-submit-btn:hover { background: #2255bb; }
+
+/* ----- 4. 退出意图弹窗 ----- */
+.exit-emoji { font-size: 44px; margin-bottom: 10px; }
+#exit-popup h3 { font-size: 22px; margin: 0 0 12px; color: #222; }
+#exit-popup p { font-size: 14px; color: #555; line-height: 1.8; }
+#exit-countdown { color: #e94560; font-weight: bold; font-size: 18px; }
+
+/* ----- 5. 插屏广告 ----- */
+#interstitial-popup {
+  background: #fff;
+  border-radius: 12px;
+  max-width: 500px;
+  width: 92%;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+  animation: popIn 0.3s ease;
+}
+.interstitial-skip-area {
+  background: #1a1a2e;
+  color: #aaa;
+  font-size: 12px;
+  padding: 8px 16px;
+  text-align: right;
+}
+.interstitial-close-btn {
+  background: #fff;
+  color: #333;
+  border: 1px solid #ccc;
+  padding: 4px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+}
+.interstitial-body {
+  padding: 30px 32px;
+  text-align: center;
+}
+.interstitial-icon { font-size: 48px; margin-bottom: 12px; }
+.interstitial-body h2 { margin: 0 0 10px; font-size: 22px; }
+.interstitial-body p { font-size: 14px; color: #555; margin: 6px 0; }
+.interstitial-sub { color: #888; font-size: 13px; }
+.interstitial-footer {
+  background: #f5f5f5;
+  color: #bbb;
+  font-size: 10px;
+  text-align: center;
+  padding: 6px;
+}
+
+/* ----- 6. 右下角角落广告 ----- */
+#corner-ad {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  width: 200px;
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 14px 14px 10px;
+  z-index: 8000;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  text-align: center;
+  font-size: 12px;
+  color: #333;
+}
+.corner-ad-close {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  background: none;
+  border: none;
+  color: #aaa;
+  font-size: 14px;
+  cursor: pointer;
+  line-height: 1;
+}
+.corner-ad-close:hover { color: #555; }
+.corner-ad-label {
+  font-size: 10px;
+  color: #bbb;
+  text-align: left;
+  margin-bottom: 6px;
+}
+.corner-ad-img { font-size: 32px; margin-bottom: 6px; }
+.corner-ad-text { line-height: 1.6; }
+.corner-ad-price { color: #e94560; font-weight: bold; }
+.corner-ad-btn {
+  display: block;
+  width: 100%;
+  margin-top: 10px;
+  padding: 6px 0;
+  background: linear-gradient(135deg, #ff5f2e, #ff2d55);
+  color: #fff;
+  font-size: 12px;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.corner-ad-btn:hover { opacity: 0.9; }
+
+/* ----- 7. 左侧浮动竖幅广告 ----- */
+#float-side-ad {
+  position: fixed;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 8000;
+}
+.float-ad-inner {
+  background: linear-gradient(180deg, #fff9f0, #fff3e0);
+  border: 1px solid #ffd080;
+  border-left: none;
+  border-radius: 0 10px 10px 0;
+  padding: 16px 14px 12px 10px;
+  text-align: center;
+  font-size: 12px;
+  color: #333;
+  width: 90px;
+  box-shadow: 3px 3px 12px rgba(0,0,0,0.12);
+  position: relative;
+}
+.float-ad-close {
+  position: absolute;
+  top: 4px;
+  right: 6px;
+  font-size: 12px;
+  color: #aaa;
+  cursor: pointer;
+  line-height: 1;
+}
+.float-ad-close:hover { color: #555; }
+.float-ad-tag {
+  font-size: 9px;
+  color: #bbb;
+  margin-bottom: 6px;
+}
+.float-ad-emoji { font-size: 28px; margin-bottom: 6px; }
+.float-ad-text { line-height: 1.6; font-size: 11px; }
+.float-ad-btn {
+  display: block;
+  width: 100%;
+  margin-top: 8px;
+  padding: 5px 0;
+  background: #f5a623;
+  color: #fff;
+  font-size: 11px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.float-ad-btn:hover { background: #e09420; }
+
+/* ----- 8. 页内广告 ----- */
+.inline-ad {
+  background: #fffef0;
+  border: 1px solid #f0d060;
+  border-left: 4px solid #f5a623;
+  border-radius: 4px;
+  padding: 12px 14px;
+  margin: 18px 0;
+  font-size: 13px;
+}
+.inline-ad-tag {
+  display: inline-block;
+  background: #f5a623;
+  color: #fff;
+  font-size: 10px;
+  padding: 1px 6px;
+  border-radius: 3px;
+  margin-bottom: 8px;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+}
+.inline-ad-content {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.inline-ad-img { font-size: 32px; flex-shrink: 0; }
+.inline-ad-text { line-height: 1.7; color: #444; }
+.inline-ad-link {
+  color: #e94560;
+  font-weight: bold;
+  text-decoration: none;
+}
+.inline-ad-link:hover { text-decoration: underline; }
+.inline-ad-wide { background: #f0f8ff; border-color: #90c0e8; border-left-color: #3366cc; }
+.inline-ad-wide .inline-ad-tag { background: #3366cc; }
+
+/* ----- 9. 底部固定广告条 ----- */
+#bottom-ad-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 9000;
+  background: linear-gradient(90deg, #1c2b3a, #243447);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 50px 10px 16px;
+  font-size: 13px;
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.3);
+}
+.bottom-bar-close {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #888;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 4px 6px;
+}
+.bottom-bar-close:hover { color: #fff; }
+.bottom-bar-icon { font-size: 20px; flex-shrink: 0; }
+.bottom-bar-text { flex: 1; }
+.bottom-bar-btn {
+  background: #e94560;
+  color: #fff;
+  border: none;
+  padding: 6px 16px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.bottom-bar-btn:hover { background: #c73652; }
+.bottom-bar-disclaimer {
+  font-size: 10px;
+  color: #666;
+  flex-shrink: 0;
+}
+
+/* ----- 10. 聊天气泡 ----- */
+#chat-bubble {
+  position: fixed;
+  bottom: 80px;
+  right: 18px;
+  z-index: 8500;
+  cursor: pointer;
+}
+#chat-bubble-icon {
+  width: 52px;
+  height: 52px;
+  background: linear-gradient(135deg, #3366cc, #1a44aa);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  box-shadow: 0 4px 16px rgba(51,102,204,0.4);
+  animation: chatBounce 2s infinite;
+}
+@keyframes chatBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+#chat-bubble-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: #e94560;
+  color: #fff;
+  font-size: 11px;
+  font-weight: bold;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #fff;
+}
+#chat-tooltip {
+  display: none;
+  position: absolute;
+  bottom: 62px;
+  right: 0;
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 13px;
+  color: #333;
+  white-space: nowrap;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+  line-height: 1.8;
+}
+
+/* ----- 11. Cookie 横幅 ----- */
+#cookie-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 9500;
+  background: #2c2c2c;
+  color: #e0e0e0;
+  font-size: 12px;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.4);
+}
+.cookie-icon { font-size: 20px; flex-shrink: 0; }
+.cookie-text { flex: 1; line-height: 1.6; min-width: 200px; }
+.cookie-link { color: #7abaff; }
+.cookie-accept {
+  background: #3366cc;
+  color: #fff;
+  border: none;
+  padding: 7px 16px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.cookie-accept:hover { background: #2255bb; }
+.cookie-manage {
+  background: none;
+  color: #aaa;
+  border: 1px solid #555;
+  padding: 7px 14px;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.cookie-manage:hover { color: #fff; border-color: #888; }
+
+/* ----- 12. 右侧滚动广告 ----- */
+#scroll-ad {
+  position: fixed;
+  right: 0;
+  top: 35%;
+  z-index: 7500;
+}
+.scroll-ad-inner {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-right: none;
+  border-radius: 10px 0 0 10px;
+  padding: 14px 12px 10px;
+  text-align: center;
+  font-size: 12px;
+  color: #333;
+  width: 90px;
+  box-shadow: -3px 3px 12px rgba(0,0,0,0.1);
+  line-height: 1.6;
+  position: relative;
+}
+.scroll-ad-close {
+  position: absolute;
+  top: 4px;
+  right: 6px;
+  background: none;
+  border: none;
+  color: #aaa;
+  font-size: 12px;
+  cursor: pointer;
+}
+.scroll-ad-close:hover { color: #555; }
+.scroll-ad-label {
+  font-size: 10px;
+  color: #bbb;
+  margin-bottom: 4px;
+}
+.scroll-ad-btn {
+  display: block;
+  width: 100%;
+  margin-top: 8px;
+  padding: 5px 0;
+  background: #e94560;
+  color: #fff;
+  font-size: 11px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* ----- 内容区给顶底 bar 留出空间 ----- */
+body {
+  padding-top: 42px;
+  padding-bottom: 50px;
+}
+
+/* ----- 红色/绿色 inline-ad 变体 ----- */
+.inline-ad-red {
+  background: #fff5f5;
+  border-color: #ffb0b0;
+  border-left-color: #e94560;
+}
+.inline-ad-red .inline-ad-tag { background: #e94560; }
+.inline-ad-green {
+  background: #f3fff5;
+  border-color: #90d8a0;
+  border-left-color: #28a745;
+}
+.inline-ad-green .inline-ad-tag { background: #28a745; }
+
+/* ----- 13. 通知 Toast ----- */
+#notif-container {
+  position: fixed;
+  top: 60px;
+  right: 16px;
+  z-index: 9800;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  pointer-events: none;
+}
+.notif-toast {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 12px 36px 12px 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 260px;
+  max-width: 320px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  pointer-events: all;
+  opacity: 0;
+  transform: translateX(40px);
+  transition: opacity 0.35s, transform 0.35s;
+  position: relative;
+}
+.notif-toast.notif-show { opacity: 1; transform: translateX(0); }
+.notif-icon { font-size: 22px; flex-shrink: 0; }
+.notif-body { font-size: 13px; line-height: 1.5; }
+.notif-close {
+  position: absolute;
+  top: 8px; right: 8px;
+  background: none; border: none; color: #aaa; font-size: 14px; cursor: pointer;
+}
+.notif-close:hover { color: #555; }
+
+/* ----- 14. 假进度条 ----- */
+#fake-progress {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  z-index: 99999;
+  background: rgba(255,255,255,0.2);
+}
+#fake-progress-fill {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, #3366cc, #e94560);
+  transition: width 0.3s ease;
+}
+
+/* ----- 15. 优惠券气泡 ----- */
+#coupon-bubble {
+  position: fixed;
+  bottom: 80px;
+  left: 20px;
+  z-index: 8500;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.4s, transform 0.4s;
+}
+#coupon-bubble.coupon-show { opacity: 1; transform: translateY(0); }
+.coupon-close {
+  position: absolute;
+  top: -8px; right: -8px;
+  background: #555; color: #fff; border: none;
+  width: 20px; height: 20px; border-radius: 50%;
+  font-size: 12px; cursor: pointer; line-height: 1;
+}
+.coupon-inner {
+  display: flex;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.18);
+  border: 1px solid #e0e0e0;
+}
+.coupon-left {
+  background: linear-gradient(135deg, #e94560, #c0392b);
+  color: #fff;
+  padding: 16px 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 80px;
+}
+.coupon-amount { font-size: 11px; }
+.coupon-amount span { font-size: 28px; font-weight: bold; }
+.coupon-type { font-size: 10px; opacity: 0.85; margin-top: 2px; }
+.coupon-right {
+  padding: 12px 14px;
+  font-size: 12px;
+  color: #333;
+  line-height: 1.6;
+  max-width: 180px;
+}
+.coupon-title { font-weight: bold; font-size: 14px; margin-bottom: 4px; }
+.coupon-desc { color: #777; font-size: 11px; }
+.coupon-btn {
+  display: block;
+  margin-top: 8px;
+  padding: 5px 14px;
+  background: #e94560;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* ----- 16. 弹幕 ----- */
+.danmaku-item {
+  position: fixed;
+  right: -100%;
+  z-index: 7000;
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  font-size: 13px;
+  padding: 5px 14px;
+  border-radius: 20px;
+  white-space: nowrap;
+  pointer-events: none;
+  animation: danmakuSlide 7s linear forwards;
+}
+@keyframes danmakuSlide {
+  from { right: -400px; }
+  to   { right: 110%; }
+}
+
+/* ----- 17. 悬浮视频广告 ----- */
+#float-video-ad {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  width: 260px;
+  z-index: 8200;
+  background: #1a1a2e;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.35);
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.4s, transform 0.4s;
+}
+#float-video-ad.fva-show { opacity: 1; transform: translateY(0); }
+#float-video-ad.fva-minimized .fva-body { display: none; }
+.fva-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 10px;
+  background: #0d0d1a;
+  font-size: 12px;
+  color: #aaa;
+}
+.fva-tag {
+  background: #e94560;
+  color: #fff;
+  font-size: 10px;
+  padding: 1px 5px;
+  border-radius: 3px;
+}
+.fva-title { flex: 1; font-size: 12px; color: #ddd; }
+.fva-min, .fva-close {
+  background: none; border: none; color: #888; font-size: 14px; cursor: pointer; padding: 2px 4px;
+}
+.fva-min:hover, .fva-close:hover { color: #fff; }
+.fva-screen {
+  position: relative;
+  height: 140px;
+  background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.fva-play {
+  width: 48px; height: 48px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; color: #fff;
+  cursor: pointer;
+  border: 2px solid rgba(255,255,255,0.3);
+}
+.fva-overlay-text {
+  position: absolute;
+  bottom: 8px; left: 10px;
+  color: rgba(255,255,255,0.7);
+  font-size: 11px;
+}
+.fva-info {
+  padding: 10px 12px 6px;
+  font-size: 12px;
+  color: #ccc;
+  line-height: 1.5;
+}
+.fva-info strong { color: #fff; }
+.fva-cta {
+  display: block;
+  margin: 6px 12px 12px;
+  padding: 8px;
+  background: linear-gradient(135deg, #ff5f2e, #ff2d55);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: center;
+}
+
+/* ----- 18. 相关推荐广告区 ----- */
+#related-ads {
+  max-width: 1200px;
+  margin: 20px auto 0;
+  padding: 16px 20px;
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+}
+.related-ads-title {
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.related-ads-tag {
+  font-size: 10px;
+  background: #f5a623;
+  color: #fff;
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-weight: normal;
+}
+.related-ads-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+.related-ad-card {
+  border: 1px solid #e8e8e8;
+  border-radius: 8px;
+  padding: 14px 12px;
+  cursor: pointer;
+  position: relative;
+  transition: box-shadow 0.2s;
+  background: #fafafa;
+}
+.related-ad-card:hover { box-shadow: 0 3px 12px rgba(0,0,0,0.1); }
+.rac-img { font-size: 30px; margin-bottom: 8px; }
+.rac-text { font-size: 12px; color: #444; line-height: 1.6; }
+.rac-text strong { color: #222; }
+.rac-text span { color: #888; }
+.rac-badge {
+  position: absolute;
+  top: 6px; right: 6px;
+  font-size: 9px;
+  color: #bbb;
+  border: 1px solid #e0e0e0;
+  padding: 1px 4px;
+  border-radius: 3px;
+}
+
+/* ----- 19. 滚动触发弹窗 ----- */
+#scroll-trigger-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#scroll-trigger-popup {
+  position: relative;
+  background: #fff;
+  border-radius: 12px;
+  padding: 30px 32px;
+  max-width: 380px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  animation: popIn 0.3s ease;
+}
+.scroll-trigger-icon { font-size: 40px; margin-bottom: 12px; }
+#scroll-trigger-popup h3 { margin: 0 0 10px; font-size: 20px; }
+#scroll-trigger-popup p { font-size: 14px; color: #555; line-height: 1.7; }
+
+/* ----- 21. 正在阅读人数条 ----- */
+#reader-count-bar {
+  position: fixed;
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 7500;
+  background: rgba(26,26,46,0.88);
+  color: #ddd;
+  font-size: 12px;
+  padding: 7px 18px;
+  border-radius: 20px;
+  white-space: nowrap;
+  pointer-events: none;
+  backdrop-filter: blur(4px);
+}
+#reader-count-bar strong { color: #7ecbff; }
+.rcb-dot {
+  display: inline-block;
+  width: 8px; height: 8px;
+  background: #4cde80;
+  border-radius: 50%;
+  margin-right: 6px;
+  animation: pulse 1.5s infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+/* ----- 22. 突发新闻角标 ----- */
+#breaking-badge {
+  position: fixed;
+  top: 60px;
+  left: 0;
+  z-index: 8800;
+  background: linear-gradient(90deg, #e94560, #c0392b);
+  color: #fff;
+  font-size: 12px;
+  padding: 8px 36px 8px 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 0 6px 6px 0;
+  box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+  max-width: 340px;
+}
+.breaking-label {
+  background: #fff;
+  color: #e94560;
+  font-size: 10px;
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: 3px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.breaking-text { font-size: 12px; }
+.breaking-link { color: #ffcccc; font-size: 11px; white-space: nowrap; flex-shrink: 0; }
+.breaking-close {
+  position: absolute;
+  top: 6px; right: 8px;
+  background: none; border: none; color: rgba(255,255,255,0.6); font-size: 13px; cursor: pointer;
+}
+.breaking-close:hover { color: #fff; }
+
+/* ----- 23. 音频提醒横幅 ----- */
+#audio-prompt {
+  position: fixed;
+  top: 52px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9200;
+  background: #1a1a2e;
+  color: #ddd;
+  font-size: 13px;
+  padding: 10px 18px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+  white-space: nowrap;
+}
+.audio-icon { font-size: 18px; }
+.audio-enable-btn {
+  background: #3366cc; color: #fff; border: none;
+  padding: 5px 14px; border-radius: 5px; font-size: 12px; cursor: pointer;
+}
+.audio-dismiss-btn {
+  background: none; color: #888; border: 1px solid #555;
+  padding: 5px 10px; border-radius: 5px; font-size: 12px; cursor: pointer;
+}
+
+/* ----- 24. 网络警告横幅 ----- */
+#network-warn {
+  position: fixed;
+  top: 52px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9100;
+  background: #fffbe6;
+  border: 1px solid #ffe58f;
+  color: #856404;
+  font-size: 13px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  white-space: nowrap;
+}
+.nw-retry {
+  background: #ffc107; color: #333; border: none;
+  padding: 4px 12px; border-radius: 4px; font-size: 12px; cursor: pointer; font-weight: bold;
+}
+.nw-close {
+  background: none; border: none; color: #aaa; font-size: 14px; cursor: pointer; margin-left: 4px;
+}
+

@@ -1,0 +1,193 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Linux Libertine', 'Georgia', serif;
+  font-size: 14px;
+  color: #202122;
+  background: #f8f9fa;
+}
+
+a { color: #3366cc; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ── Top bar ── */
+#topbar {
+  background: #fff;
+  border-bottom: 1px solid #a2a9b1;
+  padding: 6px 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+#topbar .site-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #54595d;
+  letter-spacing: 1px;
+}
+#topbar nav a {
+  font-size: 13px;
+  color: #54595d;
+  padding: 4px 8px;
+}
+#topbar nav a:hover, #topbar nav a.active {
+  color: #3366cc;
+  border-bottom: 2px solid #3366cc;
+}
+
+/* ── Layout ── */
+#layout {
+  display: flex;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 16px;
+  gap: 24px;
+}
+
+/* ── Sidebar ── */
+#sidebar {
+  width: 200px;
+  flex-shrink: 0;
+}
+.toc-box {
+  background: #f8f9fa;
+  border: 1px solid #a2a9b1;
+  padding: 12px 14px;
+  font-size: 13px;
+}
+.toc-box .toc-title {
+  font-weight: bold;
+  font-size: 13px;
+  margin-bottom: 8px;
+  color: #202122;
+}
+.toc-box ol {
+  padding-left: 16px;
+}
+.toc-box li {
+  margin: 4px 0;
+  line-height: 1.4;
+}
+.toc-box a { color: #3366cc; }
+
+.infobox {
+  background: #f8f9fa;
+  border: 1px solid #a2a9b1;
+  padding: 12px;
+  margin-top: 16px;
+  font-size: 12.5px;
+  text-align: center;
+}
+.infobox img {
+  width: 100%;
+  max-width: 180px;
+  height: 220px;
+  object-fit: cover;
+  background: #ddd;
+  display: block;
+  margin: 0 auto 8px;
+}
+.infobox .name {
+  font-weight: bold;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+.infobox table {
+  width: 100%;
+  text-align: left;
+  border-collapse: collapse;
+}
+.infobox td {
+  padding: 2px 4px;
+  vertical-align: top;
+  line-height: 1.4;
+}
+.infobox td:first-child {
+  font-weight: bold;
+  color: #54595d;
+  white-space: nowrap;
+  width: 48%;
+}
+
+/* ── Main content ── */
+#content {
+  flex: 1;
+  min-width: 0;
+  background: #fff;
+  border: 1px solid #a2a9b1;
+  padding: 20px 28px;
+}
+
+#content h1 {
+  font-family: 'Linux Libertine', 'Georgia', serif;
+  font-size: 28px;
+  font-weight: normal;
+  border-bottom: 1px solid #a2a9b1;
+  padding-bottom: 4px;
+  margin-bottom: 14px;
+}
+
+#content h2 {
+  font-size: 20px;
+  font-weight: normal;
+  border-bottom: 1px solid #a2a9b1;
+  margin: 24px 0 10px;
+  padding-bottom: 2px;
+}
+
+#content h3 {
+  font-size: 16px;
+  margin: 16px 0 6px;
+}
+
+#content p {
+  line-height: 1.7;
+  margin-bottom: 10px;
+  text-align: justify;
+}
+
+#content ul, #content ol {
+  padding-left: 24px;
+  margin-bottom: 10px;
+}
+#content li { line-height: 1.7; margin: 2px 0; }
+
+/* ── Film table ── */
+.film-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+  margin: 12px 0;
+}
+.film-table th {
+  background: #eaecf0;
+  border: 1px solid #a2a9b1;
+  padding: 6px 10px;
+  text-align: left;
+  font-weight: bold;
+}
+.film-table td {
+  border: 1px solid #a2a9b1;
+  padding: 5px 10px;
+  vertical-align: top;
+}
+.film-table tr:nth-child(even) td { background: #f8f9fa; }
+
+/* ── Quote ── */
+blockquote {
+  border-left: 3px solid #a2a9b1;
+  padding: 6px 14px;
+  color: #54595d;
+  margin: 12px 0;
+  font-style: italic;
+}
+
+/* ── Footer ── */
+#footer {
+  text-align: center;
+  font-size: 12px;
+  color: #54595d;
+  padding: 20px;
+  border-top: 1px solid #a2a9b1;
+  margin-top: 30px;
+}
