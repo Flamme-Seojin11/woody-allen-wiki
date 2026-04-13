@@ -601,7 +601,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setupLinkHijack();
 });
 
-// ---- 25. wiki-link 点击拦截（70% 插屏广告后跳 / 20% 广告落地页 / 10% 正常跳）----
+// ---- 25. wiki-link 点击：新标签打开目标词条，同时当前页弹插屏广告 ----
 function setupLinkHijack() {
   document.addEventListener('click', (e) => {
     const a = e.target.closest('a.wiki-link');
@@ -609,26 +609,17 @@ function setupLinkHijack() {
     e.preventDefault();
 
     const dest = a.getAttribute('href');
-    const roll = Math.random();
 
-    if (roll < 0.20) {
-      // 20%：新标签打开广告落地页，倒计时结束后跳目标页
-      window.open('ad-landing.html?dest=' + encodeURIComponent(dest), '_blank');
+    // 立即在新标签打开目标词条（新页面自带完整广告系统）
+    window.open(dest, '_blank');
 
-    } else if (roll < 0.90) {
-      // 70%：弹插屏广告，关闭后新标签打开目标页
-      showLinkInterstitial(dest);
-
-    } else {
-      // 10%：新标签正常跳转
-      window.open(dest, '_blank');
-    }
+    // 同时在当前页弹一个插屏广告（可直接点 × 关闭，不阻拦）
+    showLinkInterstitial();
   });
 }
 
-// 链接插屏广告（点击词条时弹出）
-function showLinkInterstitial(dest) {
-  // 如果已有插屏，先移除
+// 当前页插屏广告（点 × 立即关闭，不拦截跳转）
+function showLinkInterstitial() {
   const old = document.getElementById('link-interstitial');
   if (old) old.remove();
 
@@ -641,13 +632,12 @@ function showLinkInterstitial(dest) {
   ];
   const ad = ads[Math.floor(Math.random() * ads.length)];
 
-  let countdown = 5;
   const overlay = document.createElement('div');
   overlay.id = 'link-interstitial';
   overlay.innerHTML = `
     <div id="link-interstitial-box">
       <div class="li-skip-bar">
-        <span id="li-skip-text">广告将在 <strong id="li-count">${countdown}</strong> 秒后可关闭</span>
+        <button class="interstitial-close-btn" onclick="document.getElementById('link-interstitial').remove()">✕ 关闭广告</button>
       </div>
       <div class="li-body">
         <div class="li-icon">${ad.icon}</div>
@@ -655,26 +645,10 @@ function showLinkInterstitial(dest) {
         <p>${ad.body}</p>
         <button class="popup-cta-btn" onclick="return false;">${ad.cta}</button>
       </div>
-      <div class="li-footer">此为广告内容 · 与目标词条无关</div>
+      <div class="li-footer">此为广告内容 · 词条已在新标签页中打开</div>
     </div>
   `;
   document.body.appendChild(overlay);
-
-  const countEl = document.getElementById('li-count');
-  const skipText = document.getElementById('li-skip-text');
-
-  const timer = setInterval(() => {
-    countdown--;
-    if (countEl) countEl.textContent = countdown;
-    if (countdown <= 0) {
-      clearInterval(timer);
-      if (skipText) {
-        skipText.innerHTML = `<button class="interstitial-close-btn" id="li-close-btn">✕ 关闭广告，继续阅读</button>`;
-        document.getElementById('li-close-btn').onclick = () => {
-          overlay.remove();
-          window.open(dest, '_blank');
-        };
-      }
-    }
-  }, 1000);
+  // 点击遮罩也可关闭
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) overlay.remove(); });
 }
