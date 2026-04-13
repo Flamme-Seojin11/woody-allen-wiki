@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>页面跳转中… — 电影百科</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/ads.css">
+  <style>
+    body { background: #f0f4ff; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; padding: 0; margin: 0; font-family: 'Georgia', serif; }
+    #ad-landing-wrap { max-width: 560px; width: 94%; }
+
+    /* 顶部倒计时条 */
+    #al-timer-bar { background: #1a1a2e; color: #aaa; font-size: 12px; padding: 10px 18px; border-radius: 8px 8px 0 0; display: flex; align-items: center; justify-content: space-between; }
+    #al-timer-bar strong { color: #7ecbff; font-size: 15px; }
+    #al-skip-btn { background: #3366cc; color: #fff; border: none; padding: 5px 14px; border-radius: 4px; font-size: 12px; font-weight: bold; cursor: pointer; display: none; }
+    #al-skip-btn:hover { background: #2255bb; }
+
+    /* 广告主体 */
+    #al-body { background: #fff; border-radius: 0 0 10px 10px; box-shadow: 0 8px 32px rgba(0,0,0,0.13); overflow: hidden; }
+    #al-hero { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); padding: 36px 32px 28px; text-align: center; color: #fff; }
+    #al-hero .al-icon { font-size: 56px; margin-bottom: 14px; }
+    #al-hero h2 { font-size: 22px; font-weight: bold; margin: 0 0 10px; }
+    #al-hero p { font-size: 14px; color: #b0c4de; margin: 0; line-height: 1.7; }
+    #al-offers { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 20px; }
+    .al-offer { background: #f8f9ff; border: 1px solid #e0e8ff; border-radius: 8px; padding: 14px 12px; text-align: center; font-size: 12px; color: #333; cursor: pointer; transition: box-shadow 0.2s; }
+    .al-offer:hover { box-shadow: 0 3px 12px rgba(51,102,204,0.15); }
+    .al-offer .ao-icon { font-size: 26px; margin-bottom: 6px; }
+    .al-offer .ao-title { font-weight: bold; font-size: 13px; color: #222; margin-bottom: 4px; }
+    .al-offer .ao-price s { color: #aaa; } .al-offer .ao-price strong { color: #e94560; }
+    #al-cta { padding: 0 20px 20px; }
+    #al-cta-btn { display: block; width: 100%; padding: 13px; background: linear-gradient(135deg, #ff5f2e, #ff2d55); color: #fff; font-size: 16px; font-weight: bold; border: none; border-radius: 8px; cursor: pointer; box-shadow: 0 4px 14px rgba(255,45,85,0.35); }
+    #al-cta-btn:hover { opacity: 0.92; }
+    #al-footer-note { text-align: center; font-size: 11px; color: #bbb; padding-bottom: 16px; }
+    #al-footer-note a { color: #3366cc; font-size: 11px; cursor: pointer; }
+  </style>
+</head>
+<body>
+
+<div id="ad-landing-wrap">
+  <div id="al-timer-bar">
+    <span>⏳ 将在 <strong id="al-count">8</strong> 秒后自动跳转到目标页面</span>
+    <button id="al-skip-btn" onclick="doSkip()">跳过广告 »</button>
+  </div>
+
+  <div id="al-body">
+    <div id="al-hero">
+      <div class="al-icon">🎬</div>
+      <h2>感谢您访问电影百科</h2>
+      <p>本站由广告商赞助运营<br/>请查看以下为您精选的优惠内容</p>
+    </div>
+
+    <div id="al-offers">
+      <div class="al-offer" onclick="return false;">
+        <div class="ao-icon">📺</div>
+        <div class="ao-title">流媒体会员</div>
+        <div>伍迪·艾伦全集4K</div>
+        <div class="ao-price">首月 <s>¥30</s> <strong>¥1</strong></div>
+      </div>
+      <div class="al-offer" onclick="return false;">
+        <div class="ao-icon">📚</div>
+        <div class="ao-title">电影书单</div>
+        <div>影评人精选合集</div>
+        <div class="ao-price">原价 <s>¥68</s> <strong>¥9.9</strong></div>
+      </div>
+      <div class="al-offer" onclick="return false;">
+        <div class="ao-icon">🎓</div>
+        <div class="ao-title">编剧大师班</div>
+        <div>在线视频课程</div>
+        <div class="ao-price">立减 <strong>50%</strong></div>
+      </div>
+      <div class="al-offer" onclick="return false;">
+        <div class="ao-icon">🎟️</div>
+        <div class="ao-title">电影节套票</div>
+        <div>上海电影节限定</div>
+        <div class="ao-price">8折 <strong>抢购中</strong></div>
+      </div>
+    </div>
+
+    <div id="al-cta">
+      <button id="al-cta-btn" onclick="return false;">立即查看全部优惠 →</button>
+    </div>
+    <div id="al-footer-note">
+      此为赞助广告内容 · <a onclick="doSkip()">直接跳转到目标页面</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  // 从 URL 参数获取目标地址
+  const params = new URLSearchParams(location.search);
+  const dest = params.get('dest') || 'index.html';
+
+  let count = 8;
+  const countEl = document.getElementById('al-count');
+  const skipBtn = document.getElementById('al-skip-btn');
+
+  const timer = setInterval(() => {
+    count--;
+    if (countEl) countEl.textContent = count;
+    if (count <= 3) skipBtn.style.display = 'inline-block';
+    if (count <= 0) { clearInterval(timer); doSkip(); }
+  }, 1000);
+
+  function doSkip() {
+    clearInterval(timer);
+    location.href = dest;
+  }
+</script>
+</body>
+</html>

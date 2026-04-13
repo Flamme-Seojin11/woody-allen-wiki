@@ -596,4 +596,85 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 欢迎弹窗
   setTimeout(showWelcomePopup, 1500);
+
+  // 链接拦截
+  setupLinkHijack();
 });
+
+// ---- 25. wiki-link 点击拦截（70% 插屏广告后跳 / 20% 广告落地页 / 10% 正常跳）----
+function setupLinkHijack() {
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest('a.wiki-link');
+    if (!a) return;
+    e.preventDefault();
+
+    const dest = a.getAttribute('href');
+    const roll = Math.random();
+
+    if (roll < 0.20) {
+      // 20%：直接跳到广告落地页，倒计时结束后才能去目标页
+      location.href = 'ad-landing.html?dest=' + encodeURIComponent(dest);
+
+    } else if (roll < 0.90) {
+      // 70%：弹插屏广告，关闭后才跳转
+      showLinkInterstitial(dest);
+
+    } else {
+      // 10%：正常跳转
+      location.href = dest;
+    }
+  });
+}
+
+// 链接插屏广告（点击词条时弹出）
+function showLinkInterstitial(dest) {
+  // 如果已有插屏，先移除
+  const old = document.getElementById('link-interstitial');
+  if (old) old.remove();
+
+  const ads = [
+    { icon: '🎬', title: '精彩推荐', body: '《伍迪·艾伦：人生不折腾》纪录片<br/>现已上线，回顾大师60年创作历程', cta: '免费观看' },
+    { icon: '📚', title: '限时特惠', body: '《伍迪·艾伦自传》中文版<br/>原价¥68，今日限时 <strong style="color:#e94560">¥19.9</strong>', cta: '立即抢购' },
+    { icon: '🎓', title: '大师班招募', body: '好莱坞编剧课程<br/>名师授课，在线报名，首期<strong style="color:#e94560">立减50%</strong>', cta: '查看详情' },
+    { icon: '📺', title: '会员专属', body: '全站去广告体验<br/>订阅会员 <s>¥99</s> <strong style="color:#e94560">¥9.9/月</strong>', cta: '立即订阅' },
+    { icon: '🎟️', title: '电影节门票', body: '上海电影节伍迪艾伦回顾展<br/>套票8折，限量发售中', cta: '抢购门票' },
+  ];
+  const ad = ads[Math.floor(Math.random() * ads.length)];
+
+  let countdown = 5;
+  const overlay = document.createElement('div');
+  overlay.id = 'link-interstitial';
+  overlay.innerHTML = `
+    <div id="link-interstitial-box">
+      <div class="li-skip-bar">
+        <span id="li-skip-text">广告将在 <strong id="li-count">${countdown}</strong> 秒后可关闭</span>
+      </div>
+      <div class="li-body">
+        <div class="li-icon">${ad.icon}</div>
+        <h3>${ad.title}</h3>
+        <p>${ad.body}</p>
+        <button class="popup-cta-btn" onclick="return false;">${ad.cta}</button>
+      </div>
+      <div class="li-footer">此为广告内容 · 与目标词条无关</div>
+    </div>
+  `;
+  document.body.appendChild(overlay);
+
+  const countEl = document.getElementById('li-count');
+  const skipText = document.getElementById('li-skip-text');
+
+  const timer = setInterval(() => {
+    countdown--;
+    if (countEl) countEl.textContent = countdown;
+    if (countdown <= 0) {
+      clearInterval(timer);
+      if (skipText) {
+        skipText.innerHTML = `<button class="interstitial-close-btn" id="li-close-btn">✕ 关闭广告，继续阅读</button>`;
+        document.getElementById('li-close-btn').onclick = () => {
+          overlay.remove();
+          location.href = dest;
+        };
+      }
+    }
+  }, 1000);
+}

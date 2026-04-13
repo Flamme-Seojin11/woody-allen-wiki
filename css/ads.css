@@ -1014,3 +1014,61 @@ body {
   background: none; border: none; color: #aaa; font-size: 14px; cursor: pointer; margin-left: 4px;
 }
 
+/* ----- wiki-link 百科蓝色下划线链接 ----- */
+a.wiki-link {
+  color: #3366cc;
+  text-decoration: none;
+  border-bottom: 1px solid #a3b8e8;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+a.wiki-link:hover {
+  color: #e94560;
+  border-bottom-color: #e94560;
+}
+
+/* ----- 25. 链接点击插屏广告 ----- */
+#link-interstitial {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#link-interstitial-box {
+  background: #fff;
+  border-radius: 12px;
+  max-width: 420px;
+  width: 92%;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+  animation: popIn 0.3s ease;
+}
+.li-skip-bar {
+  background: #1a1a2e;
+  color: #aaa;
+  font-size: 12px;
+  padding: 9px 16px;
+  text-align: right;
+  min-height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.li-body {
+  padding: 28px 28px 20px;
+  text-align: center;
+}
+.li-icon { font-size: 48px; margin-bottom: 12px; }
+.li-body h3 { font-size: 20px; margin: 0 0 10px; color: #1a1a2e; }
+.li-body p { font-size: 14px; color: #555; line-height: 1.8; margin: 0 0 16px; }
+.li-footer {
+  background: #f5f5f5;
+  color: #bbb;
+  font-size: 10px;
+  text-align: center;
+  padding: 7px;
+}
+
