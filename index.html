@@ -101,7 +101,17 @@
     </p>
 
     <h2 id="notable-films">代表作品</h2>
-    <table class="film-table">
+
+    <div id="film-filter-bar">
+      <span class="filter-label">按类型筛选：</span>
+      <button class="filter-btn active" data-genre="all">全部</button>
+      <button class="filter-btn" data-genre="喜剧">喜剧</button>
+      <button class="filter-btn" data-genre="剧情">剧情</button>
+      <button class="filter-btn" data-genre="犯罪">犯罪</button>
+      <button class="filter-btn" data-genre="爱情">爱情</button>
+    </div>
+
+    <table class="film-table" id="films-table">
       <thead>
         <tr>
           <th>年份</th>
@@ -110,18 +120,62 @@
           <th>备注</th>
         </tr>
       </thead>
-      <tbody>
-        <tr><td>1977</td><td><a href="annie-hall.html" class="wiki-link">安妮·霍尔</a></td><td>喜剧/爱情</td><td><a href="oscar.html" class="wiki-link">奥斯卡最佳影片、最佳导演</a></td></tr>
-        <tr><td>1979</td><td><a href="manhattan-film.html" class="wiki-link">曼哈顿</a></td><td>喜剧/爱情</td><td>AFI百大影片之一</td></tr>
-        <tr><td>1986</td><td><a href="hannah-sisters.html" class="wiki-link">汉娜姐妹</a></td><td>喜剧/剧情</td><td><a href="oscar.html" class="wiki-link">奥斯卡最佳原创剧本</a></td></tr>
-        <tr><td>1989</td><td><a href="crimes-misdemeanors.html" class="wiki-link">罪与错</a></td><td>剧情/犯罪</td><td>道德哲学代表作</td></tr>
-        <tr><td>1995</td><td><a href="mighty-aphrodite.html" class="wiki-link">非强力药</a></td><td>喜剧</td><td><a href="oscar.html" class="wiki-link">奥斯卡最佳原创剧本</a></td></tr>
-        <tr><td>2005</td><td><a href="match-point.html" class="wiki-link">赛末点</a></td><td>犯罪/剧情</td><td><a href="oscar.html" class="wiki-link">英国时期转型之作</a></td></tr>
-        <tr><td>2008</td><td><a href="vicky-cristina.html" class="wiki-link">午夜巴塞罗那</a></td><td>爱情/喜剧</td><td>奥斯卡最佳原创剧本提名</td></tr>
-        <tr><td>2011</td><td><a href="midnight-paris.html" class="wiki-link">午夜巴黎</a></td><td>喜剧/奇幻</td><td><a href="oscar.html" class="wiki-link">奥斯卡最佳原创剧本</a>，票房最高作</td></tr>
-        <tr><td>2013</td><td><a href="blue-jasmine.html" class="wiki-link">蓝色茉莉</a></td><td>剧情</td><td><a href="oscar.html" class="wiki-link">凯特·布兰切特奥斯卡影后</a></td></tr>
+      <tbody id="films-tbody">
+        <!-- 前5部：直接渲染 -->
+        <tr data-genre="喜剧 爱情"><td>1977</td><td><a href="annie-hall.html" class="wiki-link">安妮·霍尔</a></td><td>喜剧/爱情</td><td><a href="oscar.html" class="wiki-link">奥斯卡最佳影片、最佳导演</a></td></tr>
+        <tr data-genre="喜剧 爱情"><td>1979</td><td><a href="manhattan-film.html" class="wiki-link">曼哈顿</a></td><td>喜剧/爱情</td><td>AFI百大影片之一</td></tr>
+        <tr data-genre="喜剧 剧情"><td>1986</td><td><a href="hannah-sisters.html" class="wiki-link">汉娜姐妹</a></td><td>喜剧/剧情</td><td><a href="oscar.html" class="wiki-link">奥斯卡最佳原创剧本</a></td></tr>
+        <tr data-genre="剧情 犯罪"><td>1989</td><td><a href="crimes-misdemeanors.html" class="wiki-link">罪与错</a></td><td>剧情/犯罪</td><td>道德哲学代表作</td></tr>
+        <tr data-genre="喜剧"><td>1995</td><td><a href="mighty-aphrodite.html" class="wiki-link">非强力药</a></td><td>喜剧</td><td><a href="oscar.html" class="wiki-link">奥斯卡最佳原创剧本</a></td></tr>
+        <!-- 后4部：初始折叠 -->
+        <tr data-genre="犯罪 剧情" class="film-extra hidden-film"><td>2005</td><td><a href="match-point.html" class="wiki-link">赛末点</a></td><td>犯罪/剧情</td><td><a href="oscar.html" class="wiki-link">英国时期转型之作</a></td></tr>
+        <tr data-genre="爱情 喜剧" class="film-extra hidden-film"><td>2008</td><td><a href="vicky-cristina.html" class="wiki-link">午夜巴塞罗那</a></td><td>爱情/喜剧</td><td>奥斯卡最佳原创剧本提名</td></tr>
+        <tr data-genre="喜剧 奇幻" class="film-extra hidden-film"><td>2011</td><td><a href="midnight-paris.html" class="wiki-link">午夜巴黎</a></td><td>喜剧/奇幻</td><td><a href="oscar.html" class="wiki-link">奥斯卡最佳原创剧本</a>，票房最高作</td></tr>
+        <tr data-genre="剧情" class="film-extra hidden-film"><td>2013</td><td><a href="blue-jasmine.html" class="wiki-link">蓝色茉莉</a></td><td>剧情</td><td><a href="oscar.html" class="wiki-link">凯特·布兰切特奥斯卡影后</a></td></tr>
       </tbody>
     </table>
+
+    <div id="films-expand-bar">
+      <button id="films-expand-btn" onclick="expandFilms()">展开更多（共9部）▼</button>
+    </div>
+
+    <script>
+    // 展开/折叠
+    var filmsExpanded = false;
+    function expandFilms() {
+      filmsExpanded = !filmsExpanded;
+      var extras = document.querySelectorAll('.film-extra');
+      var btn = document.getElementById('films-expand-btn');
+      extras.forEach(function(tr) {
+        tr.classList.toggle('hidden-film', !filmsExpanded);
+      });
+      btn.textContent = filmsExpanded ? '收起 ▲' : '展开更多（共9部）▼';
+      applyGenreFilter();
+    }
+
+    // 类型筛选
+    document.querySelectorAll('.filter-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.filter-btn').forEach(function(b){ b.classList.remove('active'); });
+        btn.classList.add('active');
+        applyGenreFilter();
+      });
+    });
+
+    function applyGenreFilter() {
+      var genre = document.querySelector('.filter-btn.active').getAttribute('data-genre');
+      document.querySelectorAll('#films-tbody tr').forEach(function(tr) {
+        var isExtra = tr.classList.contains('film-extra');
+        var genreMatch = (genre === 'all') || (tr.getAttribute('data-genre') || '').indexOf(genre) !== -1;
+        // 额外行：只有展开时才可见；再叠加类型过滤
+        if (isExtra) {
+          tr.style.display = (filmsExpanded && genreMatch) ? '' : 'none';
+        } else {
+          tr.style.display = genreMatch ? '' : 'none';
+        }
+      });
+    }
+    </script>
 
     <h2 id="themes">创作主题</h2>
     <p>
